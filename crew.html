@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png" />
+  <link rel="style" src="./css/main.css" />
+  <script src="./js/htmx.min.js"></script>
+
+  <title>Frontend Mentor | Space tourism website</title>
+</head>
+
+<body>
+  <header hx-get="./components/header-component.html" hx-trigger="load"></header>
+  <section hx-get="./crew-commander.html" hx-trigger="load"></section>
+</body>
+
+</html>

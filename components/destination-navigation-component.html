@@ -1,0 +1,44 @@
+<style>
+  nav[aria-label="secondary"] ul {
+    display: flex;
+    gap: 1rem;
+    list-style-type: none;
+    padding: 0;
+
+    button {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    button[aria-current="page"] {
+      border-bottom: solid black 3px;
+    }
+  }
+</style>
+
+<nav aria-label="secondary">
+  <ul hx-target="body > section">
+    <li><button hx-get="./destination-moon.html">Moon</button></li>
+    <li><button hx-get="./destination-mars.html">Mars</button></li>
+    <li><button hx-get="./destination-europa.html">Europa</button></li>
+    <li><button hx-get="./destination-titan.html">Titan</button></li>
+  </ul>
+</nav>
+
+<script type="module">
+  const h2 = document.querySelector("main > h2");
+  const secondaryNavigationList = document.querySelector(
+    "nav[aria-label='secondary'] > ul",
+  );
+
+  /* set as current page if pathname matches href */
+  Array.from(secondaryNavigationList.children).forEach((listItem) => {
+    const button = listItem.firstElementChild;
+    if (button.textContent == h2.textContent) {
+      button.setAttribute("aria-current", "page");
+      return;
+    }
+  });
+</script>

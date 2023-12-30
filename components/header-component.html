@@ -1,0 +1,98 @@
+<style>
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    >a {
+      height: 6rem;
+      width: 6rem;
+
+      >img {
+        height: 6rem;
+        width: 6rem;
+        object-fit: none;
+      }
+    }
+  }
+
+  @media screen and (width > 900px) {
+    header:before {
+      content: "";
+      border-block-start: solid color-mix(in srgb, var(--neutral-900), transparent 75%) 1px;
+      left: max(7rem, calc((100vw - 900px) / 2));
+      position: absolute;
+      right: max(calc((100vw - 900px) / 2 + 32rem), 35rem);
+      z-index: 999;
+    }
+  }
+
+  nav[aria-label="primary"] {
+    background-color: color-mix(in srgb, var(--neutral-900), transparent 95%);
+    backdrop-filter: blur(80px);
+    padding-inline-start: 7.5rem;
+
+    @media screen and (width < 900px) {
+      padding-inline-start: 3rem;
+    }
+
+    padding-inline-end: max(3rem, calc((100vw - 900px) / 2));
+  }
+
+  nav[aria-label="primary"] ol {
+    counter-set: primaryNavigationList -1;
+    display: flex;
+    gap: 1rem;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    a {
+      color: inherit;
+      counter-increment: primaryNavigationList;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      min-height: 6rem;
+      gap: 1ch;
+    }
+
+    @media screen and (width > 900px) {
+      a:before {
+        content: counter(primaryNavigationList, decimal-leading-zero) " ";
+        font-weight: bold;
+      }
+    }
+
+    a[aria-current="page"] {
+      border-bottom: solid var(--neutral-900) 3px;
+    }
+  }
+</style>
+
+<a href="./"><img alt="logo" src="./assets/shared/logo.svg" /></a>
+<nav aria-label="primary">
+  <ol>
+    <li><a href="./">Home</a></li>
+    <li><a href="./destination.html">Destination</a></li>
+    <li><a href="./crew.html">Crew</a></li>
+    <li><a href="./technology.html">Technology</a></li>
+  </ol>
+</nav>
+
+<script type="module">
+  const pathname = window.location.pathname;
+  const primaryNavigationList = document.querySelector(
+    "nav[aria-label='primary'] > ol",
+  );
+
+  /* set as current page if pathname matches href */
+  Array.from(primaryNavigationList.children).forEach((listItem) => {
+    const link = listItem.firstElementChild;
+    const href = link.getAttribute("href");
+    if (href.slice(1) == pathname) {
+      link.setAttribute("aria-current", "page");
+      return;
+    }
+  });
+</script>
